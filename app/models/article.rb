@@ -3,7 +3,7 @@ class Article < ApplicationRecord
     validates :content, presence: true
 
     def self.search(queryText)
-        where('title LIKE :text OR content LIKE :text', (text: "%#{queryText}%"))
+        where('title LIKE :text OR content LIKE :text', {text: "%#{queryText}%"})
     end
 end
 
