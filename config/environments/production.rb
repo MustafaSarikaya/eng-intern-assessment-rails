@@ -87,6 +87,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Allow GitHub Pages domain
+  # Allow GitHub Pages and Railway domains
   config.hosts << '.github.io'
+  config.hosts << 'eng-intern-assessment-rails-production.up.railway.app'
 end
