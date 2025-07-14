@@ -7,3 +7,18 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Create sample articles
+Article.create!(
+  title: 'First Article',
+  content: 'This is the content of the first article.',
+  author: 'John Doe',
+  date: Date.today
+)
+
+Article.create!(
+  title: 'Second Article',
+  content: 'This is the content of the second article.',
+  author: 'Jane Smith',
+  date: Date.today - 1
+)
