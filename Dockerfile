@@ -12,7 +12,9 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development" \
-    SECRET_KEY_BASE_DUMMY="1"
+    SECRET_KEY_BASE_DUMMY="1" \
+    RAILS_LOG_TO_STDOUT="true" \
+    RAILS_LOG_LEVEL="debug"
 
 
 # Throw-away build stage to reduce size of final image
@@ -55,9 +57,10 @@ RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# Make sure the entrypoint is executable
+RUN chmod +x /rails/bin/docker-entrypoint-debug
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+ENTRYPOINT ["/rails/bin/docker-entrypoint-debug"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]

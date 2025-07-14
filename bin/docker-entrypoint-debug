@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+# Print environment for debugging
+echo "Environment variables:"
+env
+
+# Check database connection
+echo "Checking database connection..."
+bin/rails db:version || echo "Database connection failed"
+
+# If running the rails server then create or migrate existing database
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  echo "Preparing database..."
+  ./bin/rails db:prepare
+fi
+
+echo "Starting command: ${@}"
+exec "${@}"
