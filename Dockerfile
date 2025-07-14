@@ -33,6 +33,9 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Make sure the entrypoint is executable
+RUN chmod +x bin/docker-entrypoint-debug
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
@@ -56,9 +59,6 @@ COPY --from=build /rails /rails
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
-
-# Make sure the entrypoint is executable
-RUN chmod +x /rails/bin/docker-entrypoint-debug
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
