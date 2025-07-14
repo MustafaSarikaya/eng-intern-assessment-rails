@@ -23,6 +23,11 @@ Rails.application.configure do
   # Enable serving static files from `public/`
   config.public_file_server.enabled = true
 
+  # Set relative URL root for GitHub Pages
+  config.relative_url_root = '/eng-intern-assessment-rails'
+  config.asset_host = 'https://mustafasarikaya.github.io'
+  config.action_controller.relative_url_root = '/eng-intern-assessment-rails'
+
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
