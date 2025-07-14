@@ -14,7 +14,8 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development" \
     SECRET_KEY_BASE_DUMMY="1" \
     RAILS_LOG_TO_STDOUT="true" \
-    RAILS_LOG_LEVEL="debug"
+    RAILS_LOG_LEVEL="debug" \
+    PORT="8080"
 
 
 # Throw-away build stage to reduce size of final image
@@ -61,6 +62,6 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 8080
 ENTRYPOINT ["/rails/bin/docker-entrypoint-debug"]
-CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]

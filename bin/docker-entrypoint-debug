@@ -2,7 +2,11 @@
 
 # Print environment for debugging
 echo "Environment variables:"
-env
+echo "PORT: ${PORT}"
+echo "RAILS_ENV: ${RAILS_ENV}"
+echo "DATABASE_URL: ${DATABASE_URL:-not set}"
+echo "Other environment variables:"
+env | grep -v "PORT\|RAILS_ENV\|DATABASE_URL"
 
 # Check database connection
 echo "Checking database connection..."
